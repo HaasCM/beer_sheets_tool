@@ -9,6 +9,7 @@ SOURCE_DIR = $${BEERSHEETS_TOOL_ROOT}/src/
 win32:LIB_PATH = C:/dev/Libraries
 unix:LIB_PATH = /usr/local
 
+DESTDIR = "$${BEERSHEETS_TOOL_ROOT}/bin"
 OBJECTS_DIR = "$${BEERSHEETS_TOOL_ROOT}/tmp/obj"
 MOC_DIR = "$${BEERSHEETS_TOOL_ROOT}/tmp/moc"
 UI_DIR = "$${BEERSHEETS_TOOL_ROOT}/tmp/uic"

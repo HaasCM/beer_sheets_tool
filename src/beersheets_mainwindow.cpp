@@ -15,6 +15,7 @@
 */
 BeerSheetsMainWindow::BeerSheetsMainWindow(QWidget *parent) :
 QMainWindow(parent) {
+  mReader = new BeerSheetsReader(this);
   setupUi(this);
   setWindowTitle("BeerSheets Analyzer");
   fileImportBeerSheet->setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_O));
@@ -46,7 +47,8 @@ void BeerSheetsMainWindow::onImportFile() {
   QSettings settings;
   QString fileName = QFileDialog::getOpenFileName(this, "Import Beer Sheets",
                                                   settings.value("BeerSheets/Paths/Import", QDir::homePath()).toString(),
-                                                  "Beer Sheets (*.xlsx, *.h5)");
+                                                  tr("Excel Worksheet (*.xlsx) ;; HDF5 (*.h5)"));
+  mReader->read(fileName);
 }
 
 /*!

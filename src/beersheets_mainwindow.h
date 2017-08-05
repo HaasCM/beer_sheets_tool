@@ -8,6 +8,8 @@
 
 #include <ui_beersheets_mainwindow_base.h>
 
+#include "beersheets_reader.h"
+
 
 /*!
   \class BeerSheetsMainWindow
@@ -25,6 +27,7 @@ private slots:
   void onExportFile();
   void onSettings();
 private:
+  BeerSheetsReader *mReader; //!< Pointer to Object to read the beer sheets
 };
 
 #endif // BEERSHEETS_MAINWINDOW_H
