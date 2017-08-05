@@ -1,0 +1,5 @@
+INTERNAL_DATA_FORMATS = $${PWD}
+
+HEADERS += $${INTERNAL_DATA_FORMATS}/beersheet.h \
+
+SOURCES += $${INTERNAL_DATA_FORMATS}/beersheet.cpp \

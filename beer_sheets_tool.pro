@@ -4,11 +4,11 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui xlsx
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = BeerSheets Analyzer
+TARGET = BeerSheets_Analyzer
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -23,19 +23,26 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 include($${PWD}/beer_sheets_tool.pri)
+include($${SOURCE_DIR}/internal_data_formats/internal_data_formats.pri)
+INCLUDEPATH += $${INTERNAL_DATA_FORMATS}
 
 SOURCES += \
         $${SOURCE_DIR}/main.cpp \
         $${SOURCE_DIR}/beersheets_mainwindow.cpp \
         $${SOURCE_DIR}/abstract_file_reader.cpp \
-        $${SOURCE_DIR}/settings_dialog.cpp
+        $${SOURCE_DIR}/settings_dialog.cpp \
+        $${SOURCE_DIR}/beersheets_reader.cpp \
 
 HEADERS += \
         $${SOURCE_DIR}/beersheets_mainwindow.h \
         $${SOURCE_DIR}/abstract_file_reader.h \
-        $${SOURCE_DIR}/settings_dialog.h
+        $${SOURCE_DIR}/settings_dialog.h \
+        $${SOURCE_DIR}/beersheets_reader.h \
 
 FORMS += \
         $${SOURCE_DIR}/beersheets_mainwindow_base.ui \
         $${SOURCE_DIR}/settings_dialog_base.ui
+
+DISTFILES += \
+    src/internal_data_formats/internal_data_formats.pri
 
