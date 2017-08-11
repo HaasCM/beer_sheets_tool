@@ -4,6 +4,7 @@
 # Setting project paths
 BEERSHEETS_TOOL_ROOT = $${PWD}
 SOURCE_DIR = $${BEERSHEETS_TOOL_ROOT}/src/
+COMMON_DIR = $${SOURCE_DIR}/common/
 
 # Setting lib paths
 win32:LIB_PATH = C:/dev/Libraries

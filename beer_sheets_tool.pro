@@ -38,11 +38,9 @@ HEADERS += \
         $${SOURCE_DIR}/abstract_file_reader.h \
         $${SOURCE_DIR}/settings_dialog.h \
         $${SOURCE_DIR}/beersheets_reader.h \
+        $${COMMON_DIR}/common.h \
 
 FORMS += \
         $${SOURCE_DIR}/beersheets_mainwindow_base.ui \
         $${SOURCE_DIR}/settings_dialog_base.ui
-
-DISTFILES += \
-    src/internal_data_formats/internal_data_formats.pri
 
