@@ -6,6 +6,7 @@
 #define LIMIT_REGEX "[(]+[0-9]{2}+[)]|([^0-9])"
 
 #include "beersheets_reader.h"
+#include "playercolumn.h"
 
 using namespace QXlsx;
 
@@ -16,7 +17,6 @@ using namespace QXlsx;
 
 BeerSheetsReader::BeerSheetsReader(QObject *parent) :
 QObject(parent){
-
 }
 
 /*!
@@ -37,6 +37,8 @@ BeerSheet *BeerSheetsReader::read(const QString &fileName) {
   mFile = new Document(fileName);
   BeerSheet *sheet = new BeerSheet(BeerSheet::stringToSheetType(mFile->currentSheet()->sheetName()));
   readHeaderIntoBeerSheet(sheet);
+
+  readQuarterbacks(sheet);
   return sheet;
 }
 
@@ -80,13 +82,13 @@ bool BeerSheetsReader::readHeaderIntoBeerSheet(BeerSheet *sheet) {
   }
   auto readRulesSection = [&](ScoringRules ruleStruct, int section) {
     Q_UNUSED(ruleStruct)
-    QStringList rulesList = rules[section].remove(QRegularExpression("[^0-9|[.]| ]")).split(" ");
+    QStringList rulesList = rules[section].remove(QRegularExpression("[^0-9|[.]]")).split(" ");
     rulesList.removeAll("");
     if(rulesList.size() < 2) {
       return false;
     } else {
-    ruleStruct.pointsPerTD = rulesList[0].toInt();
-    ruleStruct.pointsPerYard = rulesList[1].toDouble();
+    ruleStruct.pointsPerTD = rulesList[1].toInt();
+    ruleStruct.pointsPerYard = rulesList[2].toDouble();
     }
     return true;
   };
@@ -106,4 +108,34 @@ bool BeerSheetsReader::readHeaderIntoBeerSheet(BeerSheet *sheet) {
   sheet->setRules(receiving, RuleType::Recieving);
 
   return true;
+}
+
+/*!
+  \fn bool BeerSheetsReader::readQuarterbacks(BeerSheet *sheet)
+  \brief attempts to read the quarterbacks into the program
+*/
+bool BeerSheetsReader::readQuarterbacks(BeerSheet *sheet) {
+  int quarterbackRow = 6;
+  PlayerColumn Player(3);
+  while(!mFile->read(quarterbackRow, 3).toString().isEmpty()) {
+    QString playerName = mFile->read(quarterbackRow, Player.name()).toString();
+    QString team = mFile->read(quarterbackRow, Player.team()).toString().split("/")[0];
+    int byeWeek = mFile->read(quarterbackRow, Player.team()).toString().split("/")[1].toInt();
+    double rank = mFile->read(quarterbackRow, Player.rank()).toString().toDouble();
+    QString playedData =  mFile->read(quarterbackRow, Player.played()).toString();
+    double value = mFile->read(quarterbackRow, Player.value()).toString().toDouble();
+    double scarcity = (mFile->read(quarterbackRow, Player.scarcity()).toString().remove("%")).toDouble();
+
+    /*
+    qDebug() << playerName;
+    qDebug() << team;
+    qDebug() << byeWeek;
+    qDebug() << rank;
+    qDebug() << playedData;
+    qDebug() << value;
+    qDebug() << scarcity;
+    */
+
+    ++quarterbackRow;
+  }
 }
