@@ -31,8 +31,9 @@ protected:
 
 private:
   bool readHeaderIntoBeerSheet(BeerSheet *sheet);
-
+  bool readQuarterbacks(BeerSheet *sheet);
   Document* mFile = nullptr;
+
 };
 
 #endif //BEERSHEETS_READER_H

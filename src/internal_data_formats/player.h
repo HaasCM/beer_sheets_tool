@@ -34,7 +34,7 @@ typedef struct {
 class Player{
 
 public:
-  Player();
+  Player(const QString name, const QString team, const QString position, const int byeWeek, const bool isStarter);
   ~Player();
 
   QString getName() const;
@@ -52,6 +52,7 @@ private:
   QString mName; //!< Human readable name of the player
   Common::NFLTeam mTeam; //!< enum for the player team
   Common::Position mPosition; //!< enum for the position the player plays
+  Common::NFLEnumHandler& mEnumHandler = Common::NFLEnumHandler::instance();
   int mByeWeek; //!< Bye week for the player
   bool mIsStarter; //!< is a starter for their team
   //QVector to store a struct of the below information and a date?

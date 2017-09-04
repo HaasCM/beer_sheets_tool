@@ -10,8 +10,12 @@
   \brief Default constructor for Player
 */
 
-Player::Player(){
-
+Player::Player(const QString name, const QString team, const QString position, const int byeWeek, const bool isStarter):
+mName(name),
+mByeWeek(byeWeek),
+mIsStarter(isStarter){
+  mTeam = mEnumHandler.translateTeam(team);
+  mPosition = mEnumHandler.translatePosition(position);
 }
 
 /*!
