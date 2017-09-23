@@ -7,6 +7,7 @@
 #define PLAYER_H
 
 #include "common.h"
+#include "player_data.h"
 
 /*
  * A player has
@@ -24,13 +25,6 @@
  *
 */
 
-/*
-typedef struct {
-  int primary; //!< depicts the round they should be chosen in
-  int secondary; //!< depicts the slot in the round they should be chosen in
-} Rank;
-*/
-
 class Player{
 
 public:
@@ -41,10 +35,11 @@ public:
   Common::NFLTeam getTeam() const;
   Common::Position getPosition() const;
   int getByeWeek() const;
+  QList<PlayerData> getPlayerData() const;
 
   bool isAStarter() const;
 
-
+  void addPlayerData(PlayerData &data);
 
 protected:
 
@@ -55,15 +50,8 @@ private:
   Common::NFLEnumHandler& mEnumHandler = Common::NFLEnumHandler::instance();
   int mByeWeek; //!< Bye week for the player
   bool mIsStarter; //!< is a starter for their team
-  //QVector to store a struct of the below information and a date?
 
-  //Break these out!
-  /*
-  Rank mRank; //!< rank structure for the player
-  int mGamesPlayed; //!< Total number of weeks played
-  double mValue; //!< value of the player
-  int mPositionalScarcity; //!< Scarcity of players at that positon.
-*/
+  QList<PlayerData> mPlayerDataPoints; //!< QVector to store the player datapoints
 };
 
 #endif //PLAYER_H

@@ -63,10 +63,26 @@ int Player::getByeWeek() const {
 }
 
 /*!
+  \brief returns the player data points
+  \return returns the player data points
+*/
+QList<PlayerData> Player::getPlayerData() const {
+  return mPlayerDataPoints;
+}
+
+/*!
   \fn bool Player::isAStarter() const
   \brief returns true if the player is a starter, else false
 */
 
 bool Player::isAStarter() const {
   return mIsStarter;
+}
+
+/*!
+  \brief appends a PlayerData value to the end of the player data list
+  \param data the data to be appended
+*/
+void Player::addPlayerData(PlayerData &data) {
+  mPlayerDataPoints.append(data);
 }
