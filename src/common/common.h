@@ -42,13 +42,13 @@
 
 #ifndef POSITIONS
 #define POSITIONS
-#define QUARTERBACK   QString("Quarterback")
-#define RUNNING_BACK  QString("Running Back")
-#define WIDE_RECEIVER QString("Wide Receiver")
-#define TIGHT_END     QString("Tight End")
-#define DST           QString("Defense & Special Teams")
-#define PLACE_KICKER  QString("Place Kicker")
-#define FLEX          QString("Flex")
+#define QUARTERBACK          QString("Quarterback")
+#define RUNNING_BACK         QString("Running Back")
+#define WIDE_RECEIVER        QString("Wide Receiver")
+#define TIGHT_END            QString("Tight End")
+#define DEFENSE_ST           QString("Defense & Special Teams")
+#define PLACE_KICKER         QString("Place Kicker")
+#define FLEX                 QString("Flex")
 #endif
 
 namespace Common {
@@ -131,12 +131,29 @@ namespace Common {
       }
 
       /*!
+        \brief converts the position from an enum to a string
+        \param pos position to convert
+        \return a qstring representing the position
+       */
+      QString translatePosition(const Common::Position &pos) const {
+        // Not really efficient, but its simple and for the size of the map
+        // it should be sufficient
+        //WARNING This is a bad key lookup
+        return mPositionsEnums.key(pos);
+      }
+
+      /*!
         \fn Common::NFLTeam translateTeam(const QString team) const
         \brief brief
       */
       Common::NFLTeam translateTeam(const QString team) const {
         return mNFLTeamEnums.value(team);
       }
+
+      QString translateTeam(const Common::NFLTeam &team) const {
+        return mNFLTeamEnums.key(team);
+      }
+
     private:
       NFLEnumHandler() {
         // populate the positions map
@@ -144,7 +161,7 @@ namespace Common {
         mPositionsEnums[RUNNING_BACK] = Position::RunningBack;
         mPositionsEnums[WIDE_RECEIVER] = Position::WideReceiver;
         mPositionsEnums[TIGHT_END] = Position::TightEnd;
-        mPositionsEnums[DST] = Position::DefenseSpecialTeams;
+        mPositionsEnums[DEFENSE_ST] = Position::DefenseSpecialTeams;
         mPositionsEnums[FLEX] = Position::Flex;
         mPositionsEnums[PLACE_KICKER] = Position::PlaceKicker;
 

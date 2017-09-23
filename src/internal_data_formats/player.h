@@ -41,6 +41,9 @@ public:
 
   void addPlayerData(PlayerData &data);
 
+  QStringMap toQStringMap() const;
+
+
 protected:
 
 private:

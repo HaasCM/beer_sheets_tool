@@ -86,3 +86,19 @@ bool Player::isAStarter() const {
 void Player::addPlayerData(PlayerData &data) {
   mPlayerDataPoints.append(data);
 }
+
+/*!
+  \brief converts the player to a qstringmap for debugging
+  \return
+*/
+QStringMap Player::toQStringMap() const {
+  QStringMap map;
+
+  map["Player Name"] = mName;
+  map["Team Name"] = Common::NFLEnumHandler::instance().translateTeam(mTeam);
+  map["Position"] = Common::NFLEnumHandler::instance().translatePosition(mPosition);
+  map["Is a Starter?"] = (mIsStarter) ? ("Yes") : ("No");
+  map["Bye Week"] = QString::number(mByeWeek);
+
+  return map;
+}

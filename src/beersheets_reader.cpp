@@ -7,6 +7,7 @@
 
 #include "beersheets_reader.h"
 #include "playercolumn.h"
+#include "player.h"
 
 using namespace QXlsx;
 
@@ -116,25 +117,21 @@ bool BeerSheetsReader::readHeaderIntoBeerSheet(BeerSheet *sheet) {
 */
 bool BeerSheetsReader::readQuarterbacks(BeerSheet *sheet) {
   int quarterbackRow = 6;
-  PlayerColumn Player(3);
+  PlayerColumn PlayerColumn(3);
   while(!mFile->read(quarterbackRow, 3).toString().isEmpty()) {
-    QString playerName = mFile->read(quarterbackRow, Player.name()).toString();
-    QString team = mFile->read(quarterbackRow, Player.team()).toString().split("/")[0];
-    int byeWeek = mFile->read(quarterbackRow, Player.team()).toString().split("/")[1].toInt();
-    double rank = mFile->read(quarterbackRow, Player.rank()).toString().toDouble();
-    QString playedData =  mFile->read(quarterbackRow, Player.played()).toString();
-    double value = mFile->read(quarterbackRow, Player.value()).toString().toDouble();
-    double scarcity = (mFile->read(quarterbackRow, Player.scarcity()).toString().remove("%")).toDouble();
-
-    /*
-    qDebug() << playerName;
-    qDebug() << team;
-    qDebug() << byeWeek;
-    qDebug() << rank;
-    qDebug() << playedData;
-    qDebug() << value;
-    qDebug() << scarcity;
-    */
+    QString playerName = mFile->read(quarterbackRow, PlayerColumn.name()).toString();
+    QString team = mFile->read(quarterbackRow, PlayerColumn.team()).toString().split("/")[0];
+    int byeWeek = mFile->read(quarterbackRow, PlayerColumn.team()).toString().split("/")[1].toInt();
+    double rank = mFile->read(quarterbackRow, PlayerColumn.rank()).toString().toDouble();
+    QString playedData =  mFile->read(quarterbackRow, PlayerColumn.played()).toString();
+    double value = mFile->read(quarterbackRow, PlayerColumn.value()).toString().toDouble();
+    double scarcity = (mFile->read(quarterbackRow, PlayerColumn.scarcity()).toString().remove("%")).toDouble();
+    Player player(playerName,
+                  team,
+                  QUARTERBACK,
+                  byeWeek,
+                  true);
+    qDebug() << player.toQStringMap();
 
     ++quarterbackRow;
   }
