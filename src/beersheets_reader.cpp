@@ -41,6 +41,7 @@ BeerSheet *BeerSheetsReader::read(const QString &fileName) {
   readPlayers(sheet, QUARTERBACK, 3, 6);
   readPlayers(sheet, RUNNING_BACK, 18, 6);
   readPlayers(sheet, TIGHT_END, 3, 41);
+  readPlayers(sheet, WIDE_RECEIVER, 31, 6);
   return sheet;
 }
 
