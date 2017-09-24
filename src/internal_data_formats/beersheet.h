@@ -6,6 +6,9 @@
 #ifndef BEERSHEET_H
 #define BEERSHEET_H
 
+#include "player.h"
+#include "common.h"
+
 #include <QtCore>
 
 /*!
@@ -55,6 +58,8 @@ class BeerSheet : public QObject{
   Q_OBJECT
 
 public:
+  typedef QMap<Common::Position, QList<Player>> Players;
+
   BeerSheet(SheetType type=SheetType::Snake, QObject *parent=nullptr);
   ~BeerSheet();
 
@@ -69,7 +74,9 @@ public:
   void setPPR(const double ppr);
   void setDate(const QDate &date);
 
-  static SheetType stringToSheetType(QString string);;
+  void addPlayer(Player player);
+
+  static SheetType stringToSheetType(QString string);
 
 protected:
 
@@ -84,6 +91,7 @@ private:
   ScoringRules mReceivingRules; //!< receiving rules for the beersheet
   PlayerLimits mTeamLimits; //!< limits per team
 
+  Players mPlayers;
 
 };
 

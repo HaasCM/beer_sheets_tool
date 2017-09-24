@@ -39,7 +39,7 @@ BeerSheet *BeerSheetsReader::read(const QString &fileName) {
   BeerSheet *sheet = new BeerSheet(BeerSheet::stringToSheetType(mFile->currentSheet()->sheetName()));
   readHeaderIntoBeerSheet(sheet);
 
-  readQuarterbacks(sheet);
+  readPlayers(sheet, QUARTERBACK, 3, 6);
   return sheet;
 }
 
@@ -160,25 +160,27 @@ bool BeerSheetsReader::readHeaderIntoBeerSheet(BeerSheet *sheet) {
 }
 
 /*!
-  \fn bool BeerSheetsReader::readQuarterbacks(BeerSheet *sheet)
-  \brief attempts to read the quarterbacks into the program
+  \brief attempts to read the players into the program
 */
-bool BeerSheetsReader::readQuarterbacks(BeerSheet *sheet) {
-  int quarterbackRow = 6;
-  PlayerColumn column(3);
+bool BeerSheetsReader::readPlayers(BeerSheet *sheet, QString position, int col, int row) {
+  PlayerColumn column(col);
   const QDate& sheetDate = sheet->getDate();
-  while(!mFile->read(quarterbackRow, 3).toString().isEmpty()) {
-    QString playerName = mFile->read(quarterbackRow, column.name()).toString();
-    QString team = mFile->read(quarterbackRow, column.team()).toString().split("/")[0];
-    int byeWeek = mFile->read(quarterbackRow, column.team()).toString().split("/")[1].toInt();
+  while(!mFile->read(row, 3).toString().isEmpty()) {
+    QString playerName = mFile->read(row, column.name()).toString();
+    QString team = mFile->read(row, column.team()).toString().split("/")[0];
+    int byeWeek = mFile->read(row, column.team()).toString().split("/")[1].toInt();
     Player player(playerName,
                   team,
-                  QUARTERBACK,
+                  position,
                   byeWeek,
                   true);
-    player.addPlayerData(readPlayerData(quarterbackRow, column, sheetDate));
-    ++quarterbackRow;
+    player.addPlayerData(readPlayerData(row, column, sheetDate));
+
+    sheet->addPlayer(player);
+
+    ++row;
   }
 
   return true;
 }
+
