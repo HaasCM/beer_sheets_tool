@@ -9,14 +9,15 @@
 #include <QtCore>
 #include <QtXlsx>
 
+#include "player.h"
 #include "beersheet.h"
+#include "player_column.h"
 
 using namespace QXlsx;
 
 /*!
   \class BeerSheetsReader
   \brief Class to read in Beersheet
-  \extends QObject
  */
 class BeerSheetsReader : public QObject {
   Q_OBJECT
@@ -30,6 +31,11 @@ public:
 protected:
 
 private:
+  PlayerLimits readPlayerLimits(QStringList &portionedLimits);
+  ScoringRules readRules(QString &rulesString);
+  QDate readDate(QString &date);
+  PlayerData readPlayerData(int row, PlayerColumn column, const QDate &date);
+
   bool readHeaderIntoBeerSheet(BeerSheet *sheet);
   bool readQuarterbacks(BeerSheet *sheet);
   Document* mFile = nullptr;

@@ -39,7 +39,7 @@ public:
 
   bool isAStarter() const;
 
-  void addPlayerData(PlayerData &data);
+  void addPlayerData(PlayerData data);
 
   QStringMap toQStringMap() const;
 

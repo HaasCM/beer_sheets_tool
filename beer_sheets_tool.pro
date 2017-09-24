@@ -39,7 +39,7 @@ HEADERS += \
         $${SOURCE_DIR}/settings_dialog.h \
         $${SOURCE_DIR}/beersheets_reader.h \
         $${COMMON_DIR}/common.h \
-        $${SOURCE_DIR}/playercolumn.h
+        $${SOURCE_DIR}/player_column.h
 
 FORMS += \
         $${SOURCE_DIR}/beersheets_mainwindow_base.ui \

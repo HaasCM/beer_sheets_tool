@@ -49,8 +49,7 @@ enum class RuleType {
 /*!
   \class BeerSheet
   \brief class to contain info for one beersheet
-  \extends QObject
- */
+*/
 
 class BeerSheet : public QObject{
   Q_OBJECT
@@ -62,19 +61,24 @@ public:
   SheetType getSheetType() const;
   ScoringRules getRules(const RuleType type) const;
   PlayerLimits getLimits() const;
+  QDate getDate() const;
 
   void setRules(const ScoringRules &rules, const RuleType type);
   void setLimits(const PlayerLimits &limits);
   void setTeamSize(const int size);
   void setPPR(const double ppr);
+  void setDate(const QDate &date);
 
-  static SheetType stringToSheetType(QString string);
+  static SheetType stringToSheetType(QString string);;
+
 protected:
 
 private:
   SheetType mSheetType; //!< BeerSheet Type
   int mTeamSize = 0; //!< number of players per team
   double mPPR = 0; //!< points per reception
+  QDate mDate; //!< the QDate that this sheet was updated
+
   ScoringRules mPassingRules; //!< passing rules for the beersheet
   ScoringRules mRushingRules; //!< rushing rules for the beersheet
   ScoringRules mReceivingRules; //!< receiving rules for the beersheet

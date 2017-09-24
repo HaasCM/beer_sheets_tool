@@ -104,6 +104,22 @@ SheetType BeerSheet::stringToSheetType(QString string) {
 }
 
 /*!
+  \brief gets the date of the beersheet
+  \return the date the beersheet was updated
+*/
+QDate BeerSheet::getDate() const{
+  return mDate;
+}
+
+/*!
+  \brief sets the date of the beersheet
+  \param date the date to set the beersheet to
+*/
+void BeerSheet::setDate(const QDate &date){
+  mDate = date;
+}
+
+/*!
   \fn void BeerSheet::setTeamSize(const int size)
   \brief sets the team size limit
 */

@@ -36,7 +36,7 @@ public:
     int gamesPlayed; //!< weeks the player played
   } Performance;
 
-  explicit PlayerData(QDate &date, Rank &rank, Performance &performance, double &value, int &posScarcity);
+  explicit PlayerData(const QDate &date, Rank &rank, Performance &performance, double &value, int &posScarcity);
   ~PlayerData();
 
   Rank getRank() const;

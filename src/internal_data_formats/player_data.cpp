@@ -13,7 +13,7 @@
   \param posScarcity positional scarcity value for the given player
   \param date datestamp for the datapoint
 */
-PlayerData::PlayerData(QDate &date, PlayerData::Rank &rank, PlayerData::Performance &performance, double &value, int &posScarcity) :
+PlayerData::PlayerData(const QDate &date, PlayerData::Rank &rank, PlayerData::Performance &performance, double &value, int &posScarcity) :
 mDateStamp(date),
 mRank(rank),
 mPerformance(performance),

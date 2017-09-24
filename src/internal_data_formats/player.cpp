@@ -83,7 +83,7 @@ bool Player::isAStarter() const {
   \brief appends a PlayerData value to the end of the player data list
   \param data the data to be appended
 */
-void Player::addPlayerData(PlayerData &data) {
+void Player::addPlayerData(PlayerData data) {
   mPlayerDataPoints.append(data);
 }
 
