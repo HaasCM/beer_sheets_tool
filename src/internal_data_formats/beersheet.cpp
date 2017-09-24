@@ -119,13 +119,16 @@ void BeerSheet::setDate(const QDate &date){
   mDate = date;
 }
 
+void BeerSheet::addPlayer(Player player) {
+  mPlayers[player.getPosition()].append(player);
+}
+
 /*!
   \fn void BeerSheet::setTeamSize(const int size)
   \brief sets the team size limit
 */
 
 void BeerSheet::setTeamSize(const int size) {
-  qDebug() << "Size: " << size;
   mTeamSize = size;
 }
 
@@ -135,6 +138,5 @@ void BeerSheet::setTeamSize(const int size) {
 */
 
 void BeerSheet::setPPR(const double ppr) {
-  qDebug() << "PPR: " << ppr;
   mPPR = ppr;
 }

@@ -37,7 +37,8 @@ private:
   PlayerData readPlayerData(int row, PlayerColumn column, const QDate &date);
 
   bool readHeaderIntoBeerSheet(BeerSheet *sheet);
-  bool readQuarterbacks(BeerSheet *sheet);
+  bool readPlayers(BeerSheet *sheet, QString position, int col, int row);
+
   Document* mFile = nullptr;
 
 };
