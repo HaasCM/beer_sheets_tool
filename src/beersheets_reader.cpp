@@ -40,6 +40,7 @@ BeerSheet *BeerSheetsReader::read(const QString &fileName) {
 
   readPlayers(sheet, QUARTERBACK, 3, 6);
   readPlayers(sheet, RUNNING_BACK, 18, 6);
+  readPlayers(sheet, TIGHT_END, 3, 41);
   return sheet;
 }
 
@@ -110,8 +111,9 @@ PlayerData BeerSheetsReader::readPlayerData(int row, PlayerSectionHeader column,
     rank.pick = 0;
   }
 
-
-  const QStringList performanceString = mFile->read(row, column["1/2/P"]).toString().split("/");
+  // Handle the header difference for the tight ends
+  const QString performKey = (column.contains("0.5/1/P")) ? "0.5/1/P" : "1/2/P";
+  const QStringList performanceString = mFile->read(row, column[performKey]).toString().split("/");
 
   PlayerData::Performance performance;
   performance.weeksOneWorthy = performanceString[0].toInt();
