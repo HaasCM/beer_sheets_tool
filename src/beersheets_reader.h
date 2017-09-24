@@ -11,7 +11,6 @@
 
 #include "player.h"
 #include "beersheet.h"
-#include "player_column.h"
 
 using namespace QXlsx;
 
@@ -31,10 +30,13 @@ public:
 protected:
 
 private:
+  typedef QMap<QString, int> PlayerSectionHeader;
+
   PlayerLimits readPlayerLimits(QStringList &portionedLimits);
   ScoringRules readRules(QString &rulesString);
   QDate readDate(QString &date);
-  PlayerData readPlayerData(int row, PlayerColumn column, const QDate &date);
+  PlayerData readPlayerData(int row, PlayerSectionHeader column, const QDate &date);
+  PlayerSectionHeader readPlayerSectionHeader(int row, int col);
 
   bool readHeaderIntoBeerSheet(BeerSheet *sheet);
   bool readPlayers(BeerSheet *sheet, QString position, int col, int row);

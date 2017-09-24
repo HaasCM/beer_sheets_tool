@@ -6,7 +6,6 @@
 #define LIMIT_REGEX "[(]+[0-9]{2}+[)]|([^0-9])"
 
 #include "beersheets_reader.h"
-#include "player_column.h"
 #include "player.h"
 
 using namespace QXlsx;
@@ -40,6 +39,7 @@ BeerSheet *BeerSheetsReader::read(const QString &fileName) {
   readHeaderIntoBeerSheet(sheet);
 
   readPlayers(sheet, QUARTERBACK, 3, 6);
+  readPlayers(sheet, RUNNING_BACK, 18, 6);
   return sheet;
 }
 
@@ -99,24 +99,43 @@ QDate BeerSheetsReader::readDate(QString &date) {
 
 }
 
-PlayerData BeerSheetsReader::readPlayerData(int row, PlayerColumn column, const QDate &date) {
-  const QStringList rankString = mFile->read(row, column.rank()).toString().split(".");
+PlayerData BeerSheetsReader::readPlayerData(int row, PlayerSectionHeader column, const QDate &date) {
+  const QStringList rankString = mFile->read(row, column["RNK"]).toString().split(".");
   PlayerData::Rank rank;
-  rank.round = rankString[0].toInt();
-  rank.pick = rankString[1].toInt();
+  if(rankString.size() == 2) {
+    rank.round = rankString[0].toInt();
+    rank.pick = rankString[1].toInt();
+  } else {
+    rank.round = 0;
+    rank.pick = 0;
+  }
 
-  const QStringList performanceString = mFile->read(row, column.played()).toString().split("/");
+
+  const QStringList performanceString = mFile->read(row, column["1/2/P"]).toString().split("/");
+
   PlayerData::Performance performance;
   performance.weeksOneWorthy = performanceString[0].toInt();
   performance.weeksTwoWorthy = performanceString[1].toInt();
   performance.gamesPlayed = performanceString[2].toInt();
 
-  double value = mFile->read(row, column.value()).toString().toDouble();
+  double value = mFile->read(row, column["VAL"]).toDouble();
 
-  double scarcityDouble =  mFile->read(row, column.scarcity()).toString().toDouble() * 100;
+  double scarcityDouble =  mFile->read(row, column["PS"]).toString().toDouble() * 100;
   int scarcity = qRound(scarcityDouble);
 
   return PlayerData(date, rank, performance, value, scarcity);
+}
+
+BeerSheetsReader::PlayerSectionHeader BeerSheetsReader::readPlayerSectionHeader(int row, int col) {
+  PlayerSectionHeader header;
+
+  while(!(header.contains("PS"))) {
+    QString key = mFile->read(row, col).toString().remove(" (POS)");
+    header[key] = col;
+    col++;
+  }
+
+  return header;
 }
 
 /*!
@@ -163,17 +182,27 @@ bool BeerSheetsReader::readHeaderIntoBeerSheet(BeerSheet *sheet) {
   \brief attempts to read the players into the program
 */
 bool BeerSheetsReader::readPlayers(BeerSheet *sheet, QString position, int col, int row) {
-  PlayerColumn column(col);
+  PlayerSectionHeader column = readPlayerSectionHeader((row - 1), col);
+
   const QDate& sheetDate = sheet->getDate();
-  while(!mFile->read(row, 3).toString().isEmpty()) {
-    QString playerName = mFile->read(row, column.name()).toString();
-    QString team = mFile->read(row, column.team()).toString().split("/")[0];
-    int byeWeek = mFile->read(row, column.team()).toString().split("/")[1].toInt();
+
+  while(!mFile->read(row, column["NAME"]).toString().isEmpty()) {
+    QString playerNameAndDepth = mFile->read(row, column["NAME"]).toString().remove(QRegularExpression("[(]|[)]"));
+    QStringList nameAndDepthList = playerNameAndDepth.split(QRegularExpression("[\040](?=[0-9])"));
+
+    bool isStarter = true;
+    QString playerName = nameAndDepthList[0].remove(QRegularExpression("[^a-zA-Z\040\-]")).trimmed();
+    if(nameAndDepthList.size() == 2) {
+      isStarter = (1 == nameAndDepthList[1].toInt());
+    }
+
+    QString team = mFile->read(row, column["TM/BW"]).toString().split("/")[0];
+    int byeWeek = mFile->read(row, column["TM/BW"]).toString().split("/")[1].toInt();
     Player player(playerName,
                   team,
                   position,
                   byeWeek,
-                  true);
+                  isStarter);
     player.addPlayerData(readPlayerData(row, column, sheetDate));
 
     sheet->addPlayer(player);
