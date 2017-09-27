@@ -5,6 +5,8 @@
 
 #define LIMIT_REGEX "[(]+[0-9]{2}+[)]|([^0-9])"
 
+#include <memory>
+
 #include "beersheets_reader.h"
 #include "player.h"
 
@@ -32,10 +34,10 @@ BeerSheetsReader::~BeerSheetsReader() {
   \fn BeerSheet BeerSheetsReader::read(const QString &fileName)
   \brief reads the beersheet into memory
 */
-BeerSheet *BeerSheetsReader::read(const QString &fileName) {
+std::shared_ptr<BeerSheet> BeerSheetsReader::read(const QString &fileName) {
   mFile = new Document(fileName);
 
-  BeerSheet *sheet = new BeerSheet(BeerSheet::stringToSheetType(mFile->currentSheet()->sheetName()));
+  std::shared_ptr<BeerSheet> sheet(new BeerSheet(BeerSheet::stringToSheetType(mFile->currentSheet()->sheetName())));
   readHeaderIntoBeerSheet(sheet);
 
   readPlayers(sheet, QUARTERBACK, 3, 6);
@@ -145,7 +147,7 @@ BeerSheetsReader::PlayerSectionHeader BeerSheetsReader::readPlayerSectionHeader(
   \fn bool BeerSheetReader::readHeaderIntoSheet(BeerSheet *sheet)
   \brief reads the header into sheet
 */
-bool BeerSheetsReader::readHeaderIntoBeerSheet(BeerSheet *sheet) {
+bool BeerSheetsReader::readHeaderIntoBeerSheet(std::shared_ptr<BeerSheet> sheet) {
   QString titleBar = mFile->read(1, 2).toString();
 
   if(!titleBar.contains("BeerSheet", Qt::CaseInsensitive)) {
@@ -184,7 +186,7 @@ bool BeerSheetsReader::readHeaderIntoBeerSheet(BeerSheet *sheet) {
 /*!
   \brief attempts to read the players into the program
 */
-bool BeerSheetsReader::readPlayers(BeerSheet *sheet, QString position, int col, int row) {
+bool BeerSheetsReader::readPlayers(std::shared_ptr<BeerSheet> sheet, QString position, int col, int row) {
   PlayerSectionHeader column = readPlayerSectionHeader((row - 1), col);
 
   const QDate& sheetDate = sheet->getDate();

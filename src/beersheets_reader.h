@@ -8,6 +8,7 @@
 
 #include <QtCore>
 #include <QtXlsx>
+#include <memory>
 
 #include "player.h"
 #include "beersheet.h"
@@ -25,7 +26,7 @@ public:
   BeerSheetsReader(QObject *parent = nullptr);
   ~BeerSheetsReader();
 
-  BeerSheet* read(const QString &fileName);
+  std::shared_ptr<BeerSheet> read(const QString &fileName);
 
 protected:
 
@@ -38,8 +39,8 @@ private:
   PlayerData readPlayerData(int row, PlayerSectionHeader column, const QDate &date);
   PlayerSectionHeader readPlayerSectionHeader(int row, int col);
 
-  bool readHeaderIntoBeerSheet(BeerSheet *sheet);
-  bool readPlayers(BeerSheet *sheet, QString position, int col, int row);
+  bool readHeaderIntoBeerSheet(std::shared_ptr<BeerSheet> sheet);
+  bool readPlayers(std::shared_ptr<BeerSheet> sheet, QString position, int col, int row);
 
   Document* mFile = nullptr;
 
