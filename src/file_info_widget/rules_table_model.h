@@ -3,6 +3,12 @@
 
 #include <QAbstractTableModel>
 
+// Rules:
+//  Draft Type
+//  Scoring Rules
+//  Player Limits
+//  Number of Teams
+
 class RulesTableModel : public QAbstractTableModel
 {
   Q_OBJECT

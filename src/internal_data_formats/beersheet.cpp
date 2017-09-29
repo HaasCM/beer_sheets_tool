@@ -12,7 +12,7 @@
 
 BeerSheet::BeerSheet(SheetType type, QObject *parent) :
 QObject(parent),
-mSheetType(type) {
+mRules(type) {
 
 }
 
@@ -26,72 +26,22 @@ BeerSheet::~BeerSheet() {
 }
 
 /*!
-  \fn SheetType BeerSheet::getSheetType() const
-  \brief returns the type of beer sheet
+  \brief gets the sheet rules
+  \return returns a non editable reference to the sheet rules
 */
-
-SheetType BeerSheet::getSheetType() const {
-  return mSheetType;
+const SheetRules& BeerSheet::getSheetRules() const {
+  return mRules;
 }
 
 /*!
-  \fn ScoringRules BeerSheet::getRules() const
-  \brief returns the scoring rules
+  \brief gets the sheet rules
+  \return returns an editable reference to the sheet rules
 */
-
-ScoringRules BeerSheet::getRules(const RuleType type) const {
-  switch(type) {
-    case RuleType::Passing:
-      return mPassingRules;
-
-    case RuleType::Recieving:
-      return mReceivingRules;
-
-    case RuleType::Rushing:
-      return mRushingRules;
-  }
-
-  return ScoringRules();
+SheetRules& BeerSheet::getSheetRules() {
+  return mRules;
 }
 
-/*!
-  \fn PlayerLimits BeerSheet::getLimits() const
-  \brief returns the player position limits for the sheet
-*/
 
-PlayerLimits BeerSheet::getLimits() const {
-  return mTeamLimits;
-}
-
-/*!
-  \fn void BeerSheet::setRules(const ScoringRules &rules)
-  \brief sets the scoring rules for the beer sheet
-*/
-
-void BeerSheet::setRules(const ScoringRules &rules, const RuleType type) {
-  switch(type) {
-    case RuleType::Passing:
-      mPassingRules = rules;
-      break;
-
-    case RuleType::Recieving:
-      mReceivingRules = rules;
-      break;
-
-    case RuleType::Rushing:
-      mRushingRules = rules;
-      break;
-  }
-}
-
-/*!
-  \fn void BeerSheet::setLimits(const PlayerLimits &limits)
-  \brief sets the player position limits for the sheet
-*/
-
-void BeerSheet::setLimits(const PlayerLimits &limits) {
-  mTeamLimits = limits;
-}
 
 /*!
   \fn SheetType BeerSheet::stringToSheetType(QString &string) const
@@ -116,13 +66,6 @@ QDate BeerSheet::getDate() const {
   return mDate;
 }
 
-/*!
-  \brief Returns the pointer per reception
-  \return returns a double for pointer per reception
-*/
-double BeerSheet::getPPR() const {
-  return mPPR;
-}
 
 /*!
   \brief sets the date of the beersheet
@@ -134,22 +77,4 @@ void BeerSheet::setDate(const QDate &date) {
 
 void BeerSheet::addPlayer(Player player) {
   mPlayers[player.getPosition()].append(player);
-}
-
-/*!
-  \fn void BeerSheet::setTeamSize(const int size)
-  \brief sets the team size limit
-*/
-
-void BeerSheet::setTeamSize(const int size) {
-  mTeamSize = size;
-}
-
-/*!
-  \fn void BeerSheet::setPPR(const int ppr)
-  \brief sets the ppr
-*/
-
-void BeerSheet::setPPR(const double ppr) {
-  mPPR = ppr;
 }

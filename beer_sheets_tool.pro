@@ -34,7 +34,7 @@ SOURCES += \
         $${SOURCE_DIR}/settings_dialog.cpp \
         $${SOURCE_DIR}/beersheets_reader.cpp \
         $${FILE_INFO_WIDGET}/file_info_widget.cpp \
-    src/file_info_widget/rules_table_model.cpp
+        $${FILE_INFO_WIDGET}/rules_table_model.cpp
 
 HEADERS += \
         $${SOURCE_DIR}/beersheets_mainwindow.h \
@@ -42,7 +42,7 @@ HEADERS += \
         $${SOURCE_DIR}/beersheets_reader.h \
         $${COMMON_DIR}/common.h \
         $${FILE_INFO_WIDGET}/file_info_widget.h \
-    src/file_info_widget/rules_table_model.h
+        $${FILE_INFO_WIDGET}/rules_table_model.h
 
 FORMS += \
         $${SOURCE_DIR}/beersheets_mainwindow_base.ui \

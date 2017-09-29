@@ -55,7 +55,7 @@ std::shared_ptr<BeerSheet> BeerSheetsReader::read(const QString &fileName) {
 PlayerLimits BeerSheetsReader::readPlayerLimits(QStringList &portionedLimits) {
   PlayerLimits limits;
 
-  limits.quarterBacks = portionedLimits[3].remove(QRegularExpression(LIMIT_REGEX)).toInt();
+  limits.quarterbacks = portionedLimits[3].remove(QRegularExpression(LIMIT_REGEX)).toInt();
   limits.runningBacks = portionedLimits[4].remove(QRegularExpression(LIMIT_REGEX)).toInt();
   limits.wideReceivers = portionedLimits[5].remove(QRegularExpression(LIMIT_REGEX)).toInt();
   limits.tightEnds = portionedLimits[6].remove(QRegularExpression(LIMIT_REGEX)).toInt();
@@ -161,10 +161,10 @@ bool BeerSheetsReader::readHeaderIntoBeerSheet(std::shared_ptr<BeerSheet> sheet)
     qCritical() << "Header size is not 10 elements!";
     return false;
   }
-
-  sheet->setTeamSize(portions[1].remove(QRegularExpression("[^0-9]")).toInt());
-  sheet->setPPR(portions[2].remove(QRegularExpression("[^0-9|[.]]")).toDouble());
-  sheet->setLimits(readPlayerLimits(portions));
+  SheetRules& sheetRules = sheet->getSheetRules();
+  sheetRules.setTeamSize(portions[1].remove(QRegularExpression("[^0-9]")).toInt());
+  sheetRules.setPPR(portions[2].remove(QRegularExpression("[^0-9|[.]]")).toDouble());
+  sheetRules.setLimits(readPlayerLimits(portions));
 
   QString rulesBar = mFile->read(2,2).toString();
   QStringList rules = rulesBar.split(QRegularExpression("[|]"));
@@ -174,9 +174,9 @@ bool BeerSheetsReader::readHeaderIntoBeerSheet(std::shared_ptr<BeerSheet> sheet)
     return false;
   }
 
-  sheet->setRules(readRules(rules[0]), RuleType::Passing);
-  sheet->setRules(readRules(rules[1]), RuleType::Rushing);
-  sheet->setRules(readRules(rules[2]), RuleType::Recieving);
+  sheetRules.setScoringRules(readRules(rules[0]), RuleType::Passing);
+  sheetRules.setScoringRules(readRules(rules[1]), RuleType::Rushing);
+  sheetRules.setScoringRules(readRules(rules[2]), RuleType::Recieving);
 
   sheet->setDate(readDate(rules[3]));
 
