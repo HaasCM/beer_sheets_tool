@@ -11,8 +11,8 @@
 */
 
 BeerSheet::BeerSheet(SheetType type, QObject *parent) :
-QObject(parent),
-mSheetType(type){
+  QObject(parent),
+  mSheetType(type) {
 
 }
 
@@ -43,11 +43,14 @@ ScoringRules BeerSheet::getRules(const RuleType type) const {
   switch(type) {
     case RuleType::Passing:
       return mPassingRules;
+
     case RuleType::Recieving:
       return mReceivingRules;
+
     case RuleType::Rushing:
       return mRushingRules;
   }
+
   return ScoringRules();
 }
 
@@ -70,9 +73,11 @@ void BeerSheet::setRules(const ScoringRules &rules, const RuleType type) {
     case RuleType::Passing:
       mPassingRules = rules;
       break;
+
     case RuleType::Recieving:
       mReceivingRules = rules;
       break;
+
     case RuleType::Rushing:
       mRushingRules = rules;
       break;
@@ -107,15 +112,23 @@ SheetType BeerSheet::stringToSheetType(QString string) {
   \brief gets the date of the beersheet
   \return the date the beersheet was updated
 */
-QDate BeerSheet::getDate() const{
+QDate BeerSheet::getDate() const {
   return mDate;
+}
+
+/*!
+  \brief Returns the pointer per reception
+  \return returns a double for pointer per reception
+*/
+double BeerSheet::getPPR() const {
+  return mPPR;
 }
 
 /*!
   \brief sets the date of the beersheet
   \param date the date to set the beersheet to
 */
-void BeerSheet::setDate(const QDate &date){
+void BeerSheet::setDate(const QDate &date) {
   mDate = date;
 }
 

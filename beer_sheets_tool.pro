@@ -30,14 +30,12 @@ INCLUDEPATH += $${SOURCE_DIR}
 SOURCES += \
         $${SOURCE_DIR}/main.cpp \
         $${SOURCE_DIR}/beersheets_mainwindow.cpp \
-        $${SOURCE_DIR}/abstract_file_reader.cpp \
         $${SOURCE_DIR}/settings_dialog.cpp \
         $${SOURCE_DIR}/beersheets_reader.cpp \
         $${SOURCE_DIR}/file_info_widget.cpp
 
 HEADERS += \
         $${SOURCE_DIR}/beersheets_mainwindow.h \
-        $${SOURCE_DIR}/abstract_file_reader.h \
         $${SOURCE_DIR}/settings_dialog.h \
         $${SOURCE_DIR}/beersheets_reader.h \
         $${COMMON_DIR}/common.h \

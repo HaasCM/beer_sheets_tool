@@ -10,6 +10,7 @@
 #include "common.h"
 
 #include <QtCore>
+#include <memory>
 
 /*!
   \enum SheetType
@@ -67,6 +68,7 @@ public:
   ScoringRules getRules(const RuleType type) const;
   PlayerLimits getLimits() const;
   QDate getDate() const;
+  double getPPR() const;
 
   void setRules(const ScoringRules &rules, const RuleType type);
   void setLimits(const PlayerLimits &limits);
