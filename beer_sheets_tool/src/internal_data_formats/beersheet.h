@@ -8,7 +8,7 @@
 
 #include "player.h"
 #include "sheet_rules.h"
-#include "common.h"
+#include "common/common.h"
 
 #include <QtCore>
 #include <memory>
@@ -18,7 +18,7 @@
   \brief class to contain info for one beersheet
 */
 
-class BeerSheet : public QObject{
+class BeerSheet : public QObject {
   Q_OBJECT
 
 public:
