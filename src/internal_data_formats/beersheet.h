@@ -35,8 +35,6 @@ public:
 
   void addPlayer(Player player);
 
-  static SheetType stringToSheetType(QString string);
-
 protected:
 
 private:

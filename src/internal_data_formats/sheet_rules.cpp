@@ -58,6 +58,14 @@ PlayerLimits SheetRules::getLimits() const {
 }
 
 /*!
+  \brief returns the amount of teams
+  \return returns the amount of teams
+*/
+int SheetRules::getTeamSize() const {
+  return mTeamSize;
+}
+
+/*!
   \brief Sets the rules for the specified type
   \param rules the rules to set
   \param type the type of rules to set
@@ -142,4 +150,40 @@ bool SheetRules::operator==(const SheetRules &other) const {
 */
 bool SheetRules::operator!=(const SheetRules &other) const {
   return(!((*this)==other));
+}
+
+/*!
+  \brief converts the string to a sheet type enum
+  \param string the string to convert
+  \return the enum for the sheet type
+*/
+SheetType SheetRules::stringToSheetType(QString string) {
+  if(string.toLower() == "snake") {
+    return SheetType::Snake;
+  } else if(string.toLower() == "auction") {
+    return SheetType::Auction;
+  } else {
+    return SheetType::Custom;
+  }
+}
+
+/*!
+  \brief converts the sheettype enum to a human readable string
+  \param type SheetType to convert to a human readable string
+  \return a human readable respresentation of the SheetType enum
+*/
+QString SheetRules::sheetTypeToString(SheetType type) {
+  switch(type) {
+    case SheetType::Snake: {
+      return QString("Snake");
+    }
+
+    case SheetType::Auction: {
+      return QString("Autction");
+    }
+
+    case SheetType::Custom: {
+      return QString("Custom");
+    }
+  }
 }

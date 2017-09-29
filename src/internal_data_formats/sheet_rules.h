@@ -6,6 +6,7 @@
 #ifndef SHEET_RULES_H
 #define SHEET_RULES_H
 
+#include <QString>
 
 /*!
   \enum SheetType
@@ -53,6 +54,7 @@ double getPPR() const;
 SheetType getSheetType() const;
 ScoringRules getScoringRules(const RuleType type) const;
 PlayerLimits getLimits() const;
+int getTeamSize() const;
 
   void setScoringRules(const ScoringRules &rules, const RuleType type);
   void setLimits(const PlayerLimits &limits);
@@ -61,6 +63,9 @@ PlayerLimits getLimits() const;
 
   bool operator==(const SheetRules &other) const;
   bool operator!=(const SheetRules &other) const;
+
+  static SheetType stringToSheetType(QString string);
+  static QString sheetTypeToString(SheetType type);
 
 private:
   int mTeamSize = 0; //!< number of players per team

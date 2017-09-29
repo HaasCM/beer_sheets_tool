@@ -1,6 +1,8 @@
 #ifndef RULESTABLEMODEL_H
 #define RULESTABLEMODEL_H
 
+#include "sheet_rules.h"
+
 #include <QAbstractTableModel>
 
 // Rules:
@@ -26,6 +28,7 @@ public:
   QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
 private:
+  QVector<SheetRules> mRules; //!< Vector of SheetRules
 };
 
 #endif // RULESTABLEMODEL_H

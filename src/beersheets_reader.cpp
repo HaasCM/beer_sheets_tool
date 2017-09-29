@@ -37,7 +37,7 @@ BeerSheetsReader::~BeerSheetsReader() {
 std::shared_ptr<BeerSheet> BeerSheetsReader::read(const QString &fileName) {
   mFile = new Document(fileName);
 
-  std::shared_ptr<BeerSheet> sheet(new BeerSheet(BeerSheet::stringToSheetType(mFile->currentSheet()->sheetName())));
+  std::shared_ptr<BeerSheet> sheet(new BeerSheet(SheetRules::stringToSheetType(mFile->currentSheet()->sheetName())));
   readHeaderIntoBeerSheet(sheet);
 
   readPlayers(sheet, QUARTERBACK, 3, 6);

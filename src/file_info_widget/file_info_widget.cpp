@@ -12,6 +12,8 @@
 FileInfoWidget::FileInfoWidget(QWidget *parent) :
   QWidget(parent) {
   setupUi(this);
+  mRulesModel = new RulesTableModel(this);
+  rulesTableView->setModel(mRulesModel);
 }
 
 /*!

@@ -13,7 +13,6 @@
 BeerSheet::BeerSheet(SheetType type, QObject *parent) :
 QObject(parent),
 mRules(type) {
-
 }
 
 /*!
@@ -39,23 +38,6 @@ const SheetRules& BeerSheet::getSheetRules() const {
 */
 SheetRules& BeerSheet::getSheetRules() {
   return mRules;
-}
-
-
-
-/*!
-  \fn SheetType BeerSheet::stringToSheetType(QString &string) const
-  \brief converts a string to a SheetType
-*/
-
-SheetType BeerSheet::stringToSheetType(QString string) {
-  if(string.toLower() == "snake") {
-    return SheetType::Snake;
-  } else if(string.toLower() == "auction") {
-    return SheetType::Auction;
-  } else {
-    return SheetType::Custom;
-  }
 }
 
 /*!

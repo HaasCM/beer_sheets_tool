@@ -6,6 +6,7 @@
 #ifndef FILE_INFO_WIDGET_H
 #define FILE_INFO_WIDGET_H
 
+#include "rules_table_model.h"
 #include "ui_file_info_widget_base.h"
 
 /*!
@@ -21,6 +22,7 @@ public:
 public slots:
 
 private:
+  RulesTableModel *mRulesModel = nullptr;
 };
 
 #endif // FILE_INFO_WIDGET_H
