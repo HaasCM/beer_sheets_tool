@@ -6,6 +6,8 @@ BEERSHEETS_TOOL_ROOT = $${PWD}
 SOURCE_DIR = $${BEERSHEETS_TOOL_ROOT}/src/
 COMMON_DIR = $${SOURCE_DIR}/common/
 
+FILE_INFO_WIDGET = $${SOURCE_DIR}/file_info_widget/
+
 # Setting lib paths
 win32:LIB_PATH = C:/dev/Libraries
 unix:LIB_PATH = /usr/local

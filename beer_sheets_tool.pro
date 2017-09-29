@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 include($${PWD}/beer_sheets_tool.pri)
 include($${SOURCE_DIR}/internal_data_formats/internal_data_formats.pri)
 INCLUDEPATH += $${INTERNAL_DATA_FORMATS}
+INCLUDEPATH += $${FILE_INFO_WIDGET}
 INCLUDEPATH += $${SOURCE_DIR}
 
 SOURCES += \
@@ -32,17 +33,19 @@ SOURCES += \
         $${SOURCE_DIR}/beersheets_mainwindow.cpp \
         $${SOURCE_DIR}/settings_dialog.cpp \
         $${SOURCE_DIR}/beersheets_reader.cpp \
-        $${SOURCE_DIR}/file_info_widget.cpp
+        $${FILE_INFO_WIDGET}/file_info_widget.cpp \
+    src/file_info_widget/rules_table_model.cpp
 
 HEADERS += \
         $${SOURCE_DIR}/beersheets_mainwindow.h \
         $${SOURCE_DIR}/settings_dialog.h \
         $${SOURCE_DIR}/beersheets_reader.h \
         $${COMMON_DIR}/common.h \
-        $${SOURCE_DIR}/file_info_widget.h
+        $${FILE_INFO_WIDGET}/file_info_widget.h \
+    src/file_info_widget/rules_table_model.h
 
 FORMS += \
         $${SOURCE_DIR}/beersheets_mainwindow_base.ui \
         $${SOURCE_DIR}/settings_dialog_base.ui \
-        $${SOURCE_DIR}/file_info_widget_base.ui
+        $${FILE_INFO_WIDGET}/file_info_widget_base.ui
 

@@ -20,14 +20,3 @@ FileInfoWidget::FileInfoWidget(QWidget *parent) :
 FileInfoWidget::~FileInfoWidget() {
 
 }
-
-void FileInfoWidget::onBeerSheetAdded(const std::shared_ptr<BeerSheet> &sheet) {
-  addBeerSheet(sheet);
-}
-
-void FileInfoWidget::addBeerSheet(const std::shared_ptr<BeerSheet> &sheet) {
-  QStringList list;
-  list << sheet->getDate().toString() << "Snake" << QString("%1 Teams").arg(12) << "1 PPR";
-  qDebug() << "Added";
-  fileTreeWidget->addTopLevelItem(itemToAdd);
-}

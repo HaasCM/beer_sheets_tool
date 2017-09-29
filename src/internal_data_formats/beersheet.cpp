@@ -11,8 +11,8 @@
 */
 
 BeerSheet::BeerSheet(SheetType type, QObject *parent) :
-  QObject(parent),
-  mSheetType(type) {
+QObject(parent),
+mSheetType(type) {
 
 }
 

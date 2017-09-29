@@ -48,7 +48,7 @@ void BeerSheetsMainWindow::onImportFile() {
   QString fileName = QFileDialog::getOpenFileName(this, "Import Beer Sheets",
                                                   settings.value("BeerSheets/Paths/Import", QDir::homePath()).toString(),
                                                   tr("Excel Worksheet (*.xlsx) ;; HDF5 (*.h5)"));
-  fileContents->onBeerSheetAdded(mReader->read(fileName));
+  mReader->read(fileName);
 }
 
 /*!
