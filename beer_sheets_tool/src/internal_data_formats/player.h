@@ -9,23 +9,11 @@
 #include "common/common.h"
 #include "player_data.h"
 
-/*
- * A player has
- *    One name
- *    One current team
- *    One current draftable position
- *    One bye week for the current year
- *    One flag for a starter
- *
- *    PLACE THIS INTO A PLAYER INFO CLASS?
- *      Multiple ranks dependent on the date
- *      Multiple Games played depending on the year
- *      Multiple values depending on the day
- *      Multiple position scarcity depending on the date
- *
+/*!
+  \class Player
+  \brief Class to describe the NFL Player
 */
-
-class Player{
+class Player {
 
 public:
   Player(const QString name, const QString team, const QString position, const int byeWeek, const bool isStarter);
@@ -50,7 +38,7 @@ private:
   QString mName; //!< Human readable name of the player
   Common::NFLTeam mTeam; //!< enum for the player team
   Common::Position mPosition; //!< enum for the position the player plays
-  Common::NFLEnumHandler& mEnumHandler = Common::NFLEnumHandler::instance();
+  Common::NFLEnumHandler &mEnumHandler = Common::NFLEnumHandler::instance(); //!< reference to the Common::NFLEnumHandler instance.
   int mByeWeek; //!< Bye week for the player
   bool mIsStarter; //!< is a starter for their team
 

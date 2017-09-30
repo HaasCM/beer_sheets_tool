@@ -45,16 +45,20 @@ enum class RuleType {
   Recieving,
 };
 
+/*!
+  \class SheetRules
+  \brief Class to hold attributes and behaviors for BeerSheet league rules
+*/
 class SheetRules {
 public:
   SheetRules(SheetType type);
 
 
-double getPPR() const;
-SheetType getSheetType() const;
-ScoringRules getScoringRules(const RuleType type) const;
-PlayerLimits getLimits() const;
-int getTeamSize() const;
+  double getPPR() const;
+  SheetType getSheetType() const;
+  ScoringRules getScoringRules(const RuleType type) const;
+  PlayerLimits getLimits() const;
+  int getTeamSize() const;
 
   void setScoringRules(const ScoringRules &rules, const RuleType type);
   void setLimits(const PlayerLimits &limits);

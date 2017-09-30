@@ -31,7 +31,7 @@ public:
 protected:
 
 private:
-  typedef QMap<QString, int> PlayerSectionHeader;
+  typedef QMap<QString, int> PlayerSectionHeader; //!< private typedef for the map for the player header section
 
   PlayerLimits readPlayerLimits(QStringList &portionedLimits);
   ScoringRules readRules(QString &rulesString);
@@ -42,7 +42,7 @@ private:
   bool readHeaderIntoBeerSheet(std::shared_ptr<BeerSheet> sheet);
   bool readPlayers(std::shared_ptr<BeerSheet> sheet, QString position, int col, int row);
 
-  Document* mFile = nullptr;
+  Document* mFile = nullptr; //!< Pointer to the file
 
 };
 
