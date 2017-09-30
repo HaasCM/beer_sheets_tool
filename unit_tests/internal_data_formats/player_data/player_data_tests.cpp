@@ -32,7 +32,7 @@ private slots:
   void checkDate_data();
 
   void checkEquality();
-  void checkEquailty_data();
+  void checkEquality_data();
 
   void checkInequality();
   void checkInequality_data();
@@ -69,8 +69,8 @@ void PlayerDataTests::checkRank() {
 
   //Verify no accidental referencing
 
-  rank.pick = -1;
-  rank.round = -1;
+  rank.pick += 1;
+  rank.round += 1;
 
   QVERIFY(rank.pick != data.getRank().pick);
   QVERIFY(rank.round != data.getRank().round);
@@ -127,9 +127,9 @@ void PlayerDataTests::checkPerformance() {
   QVERIFY(performance.weeksTwoWorthy == data.getPerformance().weeksTwoWorthy);
   QVERIFY(performance.gamesPlayed == data.getPerformance().gamesPlayed);
 
-  performance.weeksOneWorthy = -1;
-  performance.weeksTwoWorthy = -1;
-  performance.gamesPlayed = -1;
+  performance.weeksOneWorthy += 1;
+  performance.weeksTwoWorthy += 1;
+  performance.gamesPlayed += 1;
 
   //Verify no accidental referencing
   QVERIFY(performance.weeksOneWorthy != data.getPerformance().weeksOneWorthy);
@@ -174,7 +174,7 @@ void PlayerDataTests::checkValue() {
   bool isEqual = qFuzzyCompare(value, data.getValue());
   QVERIFY(isEqual == true);
 
-  value = -1;
+  value += 1;
   isEqual = qFuzzyCompare(value, data.getValue());
   QVERIFY(isEqual == false);
 }
@@ -192,44 +192,258 @@ void PlayerDataTests::checkValue_data() {
   QTest::addRow("8.41 Value") << 8.41;
 }
 
+/*!
+  \brief Function to test the positional scarcity of the
+*/
 void PlayerDataTests::checkPositionalScarcity() {
+  QFETCH(int, posScarcity);
 
+  double value;
+
+  QDate date = QDate::currentDate();
+
+  PlayerData::Rank rank;
+
+  PlayerData::Performance performance;
+
+  PlayerData data(date, rank, performance, value, posScarcity);
+
+  QVERIFY(posScarcity == data.getPositionalScarcity());
+
+  posScarcity += 1;
+
+  QVERIFY(posScarcity != data.getPositionalScarcity());
 }
 
+/*!
+  \brief Function to generate data for the positional scarcity test
+*/
 void PlayerDataTests::checkPositionalScarcity_data() {
+  QTest::addColumn<int>("posScarcity");
 
+  QTest::addRow("0 Scarcity") << 0;
+
+  QTest::addRow("99 Scarcity") << 99;
+
+  QTest::addRow("50 Scarcity") << 50;
 }
 
+/*!
+  \brief Function to date public interface
+*/
 void PlayerDataTests::checkDate() {
+  QFETCH(QDate, date);
 
+  double value;
+
+  int posScarcity;
+
+  PlayerData::Rank rank;
+
+  PlayerData::Performance performance;
+
+  PlayerData data(date, rank, performance, value, posScarcity);
+
+  QVERIFY(date == data.getDate());
+
+  date = date.addDays(1);
+
+  QVERIFY(date != data.getDate());
 }
 
+/*!
+  \brief Function to generate the data for the date interface tests
+*/
 void PlayerDataTests::checkDate_data() {
+  QTest::addColumn<QDate>("date");
 
+  QTest::addRow("Current Date") << QDate::currentDate();
+
+  QTest::addRow("August 10 2017") << QDate(2017, 8, 10); // yyyy, mm, dd
+
+  QTest::addRow("September 23 2015") << QDate(2015, 9, 23);
+
+  QTest::addRow("August 24 2016") << QDate(2016, 8, 24);
 }
 
+/*!
+  \brief Function to test the equality operator
+*/
 void PlayerDataTests::checkEquality() {
+  QFETCH(QDate, date);
+  QFETCH(int, round);
+  QFETCH(int, pick);
+  QFETCH(int, weeksOneWorthy);
+  QFETCH(int, weeksTwoWorthy);
+  QFETCH(int, gamesPlayed);
+  QFETCH(double, value);
+  QFETCH(int, posScarcity);
 
+  PlayerData::Rank rank;
+  rank.round = round;
+  rank.pick = pick;
+
+  PlayerData::Performance performance;
+  performance.weeksOneWorthy = weeksOneWorthy;
+  performance.weeksTwoWorthy = weeksTwoWorthy;
+  performance.gamesPlayed = gamesPlayed;
+
+  PlayerData dataLHS(date, rank, performance, value, posScarcity);
+  PlayerData dataRHS(date, rank, performance, value, posScarcity);
+
+  QVERIFY(dataLHS == dataRHS);
+  QVERIFY((dataLHS != dataRHS) == false);
 }
 
-void PlayerDataTests::checkEquailty_data() {
+/*!
+  \brief Function to generate data for the equality operator tests
+*/
+void PlayerDataTests::checkEquality_data() {
+  QTest::addColumn<QDate>("date");
+  QTest::addColumn<int>("round");
+  QTest::addColumn<int>("pick");
+  QTest::addColumn<int>("weeksOneWorthy");
+  QTest::addColumn<int>("weeksTwoWorthy");
+  QTest::addColumn<int>("gamesPlayed");
+  QTest::addColumn<double>("value");
+  QTest::addColumn<int>("posScarcity");
 
+  QTest::addRow("Null Data")
+      << QDate::currentDate() << 0 << 0 << 0 << 0 << 0 << 0. << 0;
+
+  QTest::addRow("Star Player")
+      << QDate(2017, 9, 1) << 1 << 1 << 18 << 0 << 18 << 8.6 << 99;
+
+  QTest::addRow("Player (Null Date)")
+      << QDate() << 0 << 0 << 0 << 0 << 0 << 0. << 0;
+
+  QTest::addRow("Medoirce Player")
+      << QDate::currentDate() << 5 << 12 << 3 << 15 << 18 << 4.5 << 50;
 }
 
+/*!
+  \brief Function to test teh inequality operator
+*/
 void PlayerDataTests::checkInequality() {
+  QFETCH(QDate, date);
+  QFETCH(int, round);
+  QFETCH(int, pick);
+  QFETCH(int, weeksOneWorthy);
+  QFETCH(int, weeksTwoWorthy);
+  QFETCH(int, gamesPlayed);
+  QFETCH(double, value);
+  QFETCH(int, posScarcity);
 
+  PlayerData::Rank rank;
+  rank.round = round;
+  rank.pick = pick;
+
+  PlayerData::Performance performance;
+  performance.weeksOneWorthy = weeksOneWorthy;
+  performance.weeksTwoWorthy = weeksTwoWorthy;
+  performance.gamesPlayed = gamesPlayed;
+
+  PlayerData dataLHS(date, rank, performance, value, posScarcity);
+
+  date = date.addDays(1);
+
+  rank.round += 1;
+  rank.pick += 1;
+
+  performance.weeksOneWorthy += 1;
+  performance.weeksTwoWorthy += 1;
+  performance.gamesPlayed += 1;
+
+  value += 1;
+  posScarcity += 1;
+  PlayerData dataRHS(date, rank, performance, value, posScarcity);
+
+  QVERIFY((dataLHS == dataRHS) == false);
+  QVERIFY(dataLHS != dataRHS);
 }
 
+/*!
+  \brief Function to generate the data for the inequality tests
+*/
 void PlayerDataTests::checkInequality_data() {
+  QTest::addColumn<QDate>("date");
+  QTest::addColumn<int>("round");
+  QTest::addColumn<int>("pick");
+  QTest::addColumn<int>("weeksOneWorthy");
+  QTest::addColumn<int>("weeksTwoWorthy");
+  QTest::addColumn<int>("gamesPlayed");
+  QTest::addColumn<double>("value");
+  QTest::addColumn<int>("posScarcity");
 
+  QTest::addRow("Null Data")
+      << QDate::currentDate() << 0 << 0 << 0 << 0 << 0 << 0. << 0;
+
+  QTest::addRow("Star Player")
+      << QDate(2017, 9, 1) << 1 << 1 << 18 << 0 << 18 << 8.6 << 99;
+
+  QTest::addRow("Player (Null Date)")
+      << QDate() << 0 << 0 << 0 << 0 << 0 << 0. << 0;
+
+  QTest::addRow("Medoirce Player")
+      << QDate::currentDate() << 5 << 12 << 3 << 15 << 18 << 4.5 << 50;
 }
 
+/*!
+  \brief Function to test the toQStringMap function
+*/
 void PlayerDataTests::checkToQStringMap() {
+  QFETCH(QDate, date);
+  QFETCH(int, round);
+  QFETCH(int, pick);
+  QFETCH(int, weeksOneWorthy);
+  QFETCH(int, weeksTwoWorthy);
+  QFETCH(int, gamesPlayed);
+  QFETCH(double, value);
+  QFETCH(int, posScarcity);
 
+  PlayerData::Rank rank;
+  rank.round = round;
+  rank.pick = pick;
+
+  PlayerData::Performance performance;
+  performance.weeksOneWorthy = weeksOneWorthy;
+  performance.weeksTwoWorthy = weeksTwoWorthy;
+  performance.gamesPlayed = gamesPlayed;
+
+  PlayerData data(date, rank, performance, value, posScarcity);
+
+  QStringMap map = data.toQStringMap();
+
+  QVERIFY(map[TIME_STAMP_KEY] == data.getDate().toString());
+  QVERIFY(map[ROUND_KEY] == QString::number(data.getRank().round));
+  QVERIFY(map[PICK_KEY] == QString::number(data.getRank().pick));
+  QVERIFY(map[WEEKS_ONE_KEY] == QString::number(data.getPerformance().weeksOneWorthy));
+  QVERIFY(map[WEEKS_TWO_KEY] == QString::number(data.getPerformance().weeksTwoWorthy));
+  QVERIFY(map[VALUE_KEY] == QString::number(data.getValue()));
+  QVERIFY(map[PS_KEY] == QString::number(data.getPositionalScarcity()));
 }
 
 void PlayerDataTests::checkToQStringMap_data() {
+  QTest::addColumn<QDate>("date");
+  QTest::addColumn<int>("round");
+  QTest::addColumn<int>("pick");
+  QTest::addColumn<int>("weeksOneWorthy");
+  QTest::addColumn<int>("weeksTwoWorthy");
+  QTest::addColumn<int>("gamesPlayed");
+  QTest::addColumn<double>("value");
+  QTest::addColumn<int>("posScarcity");
 
+  QTest::addRow("Null Data")
+      << QDate::currentDate() << 0 << 0 << 0 << 0 << 0 << 0. << 0;
+
+  QTest::addRow("Star Player")
+      << QDate(2017, 9, 1) << 1 << 1 << 18 << 0 << 18 << 8.6 << 99;
+
+  QTest::addRow("Player (Null Date)")
+      << QDate() << 0 << 0 << 0 << 0 << 0 << 0. << 0;
+
+  QTest::addRow("Medoirce Player")
+      << QDate::currentDate() << 5 << 12 << 3 << 15 << 18 << 4.5 << 50;
 }
 
 QTEST_MAIN(PlayerDataTests)
