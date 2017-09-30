@@ -6,6 +6,15 @@
 #ifndef PLAYER_DATA_H
 #define PLAYER_DATA_H
 
+#define TIME_STAMP_KEY    "TimeStamp"
+#define ROUND_KEY         "Round"
+#define PICK_KEY          "Pick"
+#define WEEKS_ONE_KEY     "Weeks Worthy of First"
+#define WEEKS_TWO_KEY     "Weeks Worthy of Second"
+#define GAMES_PLAYED_KEY  "Games Played"
+#define VALUE_KEY         "Value"
+#define PS_KEY            "Positional Scarcity"
+
 #include <QDate>
 #include <QDebug>
 #include <QMap>

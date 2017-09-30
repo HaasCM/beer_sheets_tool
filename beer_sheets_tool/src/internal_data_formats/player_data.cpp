@@ -113,14 +113,14 @@ bool PlayerData::operator!=(const PlayerData &other) const {
 QStringMap PlayerData::toQStringMap() const {
   QStringMap map;
 
-  map["Time Stamp"] = this->mDateStamp.toString();
-  map["Round"] = QString::number(this->mRank.round);
-  map["Pick"] = QString::number(this->mRank.pick);
-  map["Weeks Worthy of First"] = QString::number(this->mPerformance.weeksOneWorthy);
-  map["Weeks Worthy of Second"] = QString::number(this->mPerformance.weeksTwoWorthy);
-  map["Games Played"] = QString::number(this->mPerformance.gamesPlayed);
-  map["Value"] = QString::number(this->mValue);
-  map["Positional Scarcity"] = QString::number(this->mScarcity);
+  map[TIME_STAMP_KEY] = this->mDateStamp.toString();
+  map[ROUND_KEY] = QString::number(this->mRank.round);
+  map[PICK_KEY] = QString::number(this->mRank.pick);
+  map[WEEKS_ONE_KEY] = QString::number(this->mPerformance.weeksOneWorthy);
+  map[WEEKS_TWO_KEY] = QString::number(this->mPerformance.weeksTwoWorthy);
+  map[GAMES_PLAYED_KEY] = QString::number(this->mPerformance.gamesPlayed);
+  map[VALUE_KEY] = QString::number(this->mValue);
+  map[PS_KEY] = QString::number(this->mScarcity);
 
   return map;
 }
