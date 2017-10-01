@@ -7,6 +7,14 @@
 
 #include <QtCore>
 
+const QString SheetRules::SnakeEnumQString    = "Snake";
+const QString SheetRules::AuctionEnumQString  = "Auction";
+const QString SheetRules::CustomEnumQString    = "Custom";
+
+/*!
+  \brief Default constructor for the sheetrules class
+  \param type the type of the sheet
+*/
 SheetRules::SheetRules(SheetType type) :
   mSheetType(type) {
 
@@ -39,7 +47,7 @@ ScoringRules SheetRules::getScoringRules(const RuleType type) const {
       return mPassingRules;
     }
 
-    case RuleType::Recieving: {
+    case RuleType::Receiving: {
       return mReceivingRules;
     }
 
@@ -77,7 +85,7 @@ void SheetRules::setScoringRules(const ScoringRules &rules, const RuleType type)
       break;
     }
 
-    case RuleType::Recieving: {
+    case RuleType::Receiving: {
       mReceivingRules = rules;
       break;
     }
@@ -158,9 +166,9 @@ bool SheetRules::operator!=(const SheetRules &other) const {
   \return the enum for the sheet type
 */
 SheetType SheetRules::stringToSheetType(QString string) {
-  if(string.toLower() == "snake") {
+  if(string.toLower() == SnakeEnumQString.toLower()) {
     return SheetType::Snake;
-  } else if(string.toLower() == "auction") {
+  } else if(string.toLower() == AuctionEnumQString.toLower()) {
     return SheetType::Auction;
   } else {
     return SheetType::Custom;
@@ -175,15 +183,15 @@ SheetType SheetRules::stringToSheetType(QString string) {
 QString SheetRules::sheetTypeToString(SheetType type) {
   switch(type) {
     case SheetType::Snake: {
-      return QString("Snake");
+      return SnakeEnumQString;
     }
 
     case SheetType::Auction: {
-      return QString("Autction");
+      return AuctionEnumQString;
     }
 
     case SheetType::Custom: {
-      return QString("Custom");
+      return CustomEnumQString;
     }
   }
 }

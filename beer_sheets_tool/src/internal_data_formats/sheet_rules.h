@@ -6,7 +6,9 @@
 #ifndef SHEET_RULES_H
 #define SHEET_RULES_H
 
+
 #include <QString>
+#include <QMetaType>
 
 /*!
   \enum SheetType
@@ -18,32 +20,44 @@ enum class SheetType {
   Auction,
   Custom
 };
+Q_DECLARE_METATYPE(SheetType);
 
-typedef struct {
-  int pointsPerTD = 6;
-  double pointsPerYard = 0.04;
-} ScoringRules;
+struct ScoringRules {
+public:
+  int pointsPerTD;
+  double pointsPerYard;
 
-typedef struct {
-  int quarterbacks = 0;
-  int runningBacks = 0;
-  int wideReceivers = 0;
-  int tightEnds = 0;
-  int flexes = 0;
-  int DST = 0;
-  int PK = 0;
-} PlayerLimits;
+  ScoringRules(int ppTD = 6, double ppY = 0.04) : pointsPerTD(ppTD), pointsPerYard(ppY) {}
+};
+typedef struct ScoringRules ScoringRules;
+Q_DECLARE_METATYPE(ScoringRules);
+
+struct PlayerLimits {
+public:
+  int quarterbacks;
+  int runningBacks;
+  int wideReceivers;
+  int tightEnds;
+  int flexes;
+  int DST;
+  int PK;
+
+  PlayerLimits(int qb = 0, int rb = 0, int wr = 0, int te = 0, int flex = 0, int dst = 0, int pk = 0) :
+  quarterbacks(qb), runningBacks(rb), wideReceivers(wr), tightEnds(te), flexes(flex), DST(dst), PK(pk) {}
+};
+typedef struct PlayerLimits PlayerLimits;
+Q_DECLARE_METATYPE(PlayerLimits);
 
 /*!
   \enum RuleType
   \brief enum to handle the rule type
 */
-
 enum class RuleType {
   Passing,
   Rushing,
-  Recieving,
+  Receiving,
 };
+Q_DECLARE_METATYPE(RuleType);
 
 /*!
   \class SheetRules
@@ -53,6 +67,9 @@ class SheetRules {
 public:
   SheetRules(SheetType type);
 
+  static const QString SnakeEnumQString;
+  static const QString AuctionEnumQString;
+  static const QString CustomEnumQString;
 
   double getPPR() const;
   SheetType getSheetType() const;
@@ -81,5 +98,4 @@ private:
   ScoringRules mReceivingRules; //!< receiving rules for the beersheet
   PlayerLimits mTeamLimits; //!< limits per team
 };
-
 #endif // SHEET_RULES_H
