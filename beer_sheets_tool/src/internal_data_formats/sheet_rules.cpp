@@ -39,7 +39,7 @@ ScoringRules SheetRules::getScoringRules(const RuleType type) const {
       return mPassingRules;
     }
 
-    case RuleType::Recieving: {
+    case RuleType::Receiving: {
       return mReceivingRules;
     }
 
@@ -77,7 +77,7 @@ void SheetRules::setScoringRules(const ScoringRules &rules, const RuleType type)
       break;
     }
 
-    case RuleType::Recieving: {
+    case RuleType::Receiving: {
       mReceivingRules = rules;
       break;
     }

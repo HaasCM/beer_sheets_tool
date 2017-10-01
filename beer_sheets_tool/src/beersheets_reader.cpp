@@ -176,7 +176,7 @@ bool BeerSheetsReader::readHeaderIntoBeerSheet(std::shared_ptr<BeerSheet> sheet)
 
   sheetRules.setScoringRules(readRules(rules[0]), RuleType::Passing);
   sheetRules.setScoringRules(readRules(rules[1]), RuleType::Rushing);
-  sheetRules.setScoringRules(readRules(rules[2]), RuleType::Recieving);
+  sheetRules.setScoringRules(readRules(rules[2]), RuleType::Receiving);
 
   sheet->setDate(readDate(rules[3]));
 

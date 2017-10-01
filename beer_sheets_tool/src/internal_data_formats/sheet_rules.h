@@ -38,11 +38,10 @@ typedef struct {
   \enum RuleType
   \brief enum to handle the rule type
 */
-
 enum class RuleType {
   Passing,
   Rushing,
-  Recieving,
+  Receiving,
 };
 
 /*!
