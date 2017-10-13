@@ -1,6 +1,6 @@
 /*!
   \file sheet_rules.cpp
-  \brief Implementation of the SheetRules class
+  \brief Implementation of the SheetRules
 */
 
 #include "sheet_rules.h"

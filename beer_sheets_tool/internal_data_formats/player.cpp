@@ -1,6 +1,6 @@
 /*!
   \file player.cpp
-  \brief file to define Player
+  \brief File to implement Player
 */
 
 #include "player.h"

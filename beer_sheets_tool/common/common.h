@@ -1,3 +1,7 @@
+/*!
+  \file common.h
+  \brief File to define & implement common functions, and the NFLEnumHandler singleton
+*/
 #ifndef COMMON_H
 #define COMMON_H
 
@@ -108,6 +112,9 @@ namespace Common {
     Flex
   };
 
+  /*!
+    \brief A common, shared, read only, singleton to handle enum to string conversions.
+  */
   class NFLEnumHandler {
     public:
       /*!

@@ -1,6 +1,6 @@
 /*!
   \file player_data.h
-  \brief file to define the PlayerData class
+  \brief file to define the PlayerData
 */
 
 #ifndef PLAYER_DATA_H

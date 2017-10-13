@@ -1,6 +1,6 @@
 /*!
   \file settings_dialog.h
-  \brief file to define the SettingsDialog class
+  \brief file to define the SettingsDialog
 */
 
 #ifndef SETTINGS_DIALOG_H

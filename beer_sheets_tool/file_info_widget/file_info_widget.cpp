@@ -1,6 +1,6 @@
 /*!
   \file file_info_widget.cpp
-  \brief File to implement the FileInfoWidget class
+  \brief File to implement the FileInfoWidget
 */
 
 #include "file_info_widget.h"

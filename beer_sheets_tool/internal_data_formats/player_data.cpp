@@ -1,6 +1,6 @@
 /*!
   \file player_data.cpp
-  \brief file to implement the PlayerData class
+  \brief file to implement the PlayerData
 */
 
 #include "player_data.h"

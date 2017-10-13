@@ -1,6 +1,6 @@
 /*!
   \file beersheet.cpp
-  \brief file to define BeerSheet
+  \brief file to implement BeerSheet
 */
 
 #include "beersheet.h"

@@ -1,6 +1,6 @@
 /*!
   \file beersheets_mainwindow.h
-  \brief file to declare the BeerSheetsMainWindow class
+  \brief file to declare the BeerSheetsMainWindow
 */
 
 #ifndef BEERSHEETS_MAINWINDOW_H

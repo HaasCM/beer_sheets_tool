@@ -1,6 +1,6 @@
 /*!
   \file file_info_widget.h
-  \brief Definition of the FileInfoWidget class
+  \brief file to define the FileInfoWidget
 */
 
 #ifndef FILE_INFO_WIDGET_H

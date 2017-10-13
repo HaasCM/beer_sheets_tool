@@ -1,6 +1,6 @@
 /*!
   \file sheet_rules.h
-  \brief definition of the SheetRules class
+  \brief definition of the SheetRules
 */
 
 #ifndef SHEET_RULES_H
@@ -22,16 +22,22 @@ enum class SheetType {
 };
 Q_DECLARE_METATYPE(SheetType);
 
+/*!
+  \brief A struct to couple scoring rules, such as pointer per TD and pointer per yard
+*/
 struct ScoringRules {
 public:
-  int pointsPerTD;
-  double pointsPerYard;
+  int pointsPerTD; //!< Points per Touchdown
+  double pointsPerYard; //!< Points per yard
 
   ScoringRules(int ppTD = 6, double ppY = 0.04) : pointsPerTD(ppTD), pointsPerYard(ppY) {}
 };
 typedef struct ScoringRules ScoringRules;
 Q_DECLARE_METATYPE(ScoringRules);
 
+/*!
+  \brief A struct to store limits for certain positions on a team
+*/
 struct PlayerLimits {
 public:
   int quarterbacks;

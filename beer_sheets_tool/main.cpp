@@ -1,6 +1,16 @@
+/*!
+  \file main.cpp
+  \brief The Main file for the BeerSheetsTool application
+*/
 #include "beersheets_mainwindow.h"
 #include <QApplication>
 
+/*!
+  \brief The main function for the BeerSheetsTool applicaiton
+  \param argc intereger
+  \param argv char*
+  \return the application exit code
+*/
 int main(int argc, char *argv[])
 {
   QApplication a(argc, argv);

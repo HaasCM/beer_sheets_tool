@@ -1,6 +1,6 @@
 /*!
   \file settings_dialog.cpp
-  \brief file to define the Settings Dialog class
+  \brief file to define the SettingsDialog
 */
 #include <QSettings>
 #include <QFileDialog>

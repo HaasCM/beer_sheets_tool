@@ -1,6 +1,6 @@
 /*!
   \file beersheets_reader.cpp
-  \brief file to define BeerSheetsReader
+  \brief file to implement BeerSheetsReader
 */
 
 #define LIMIT_REGEX "[(]+[0-9]{2}+[)]|([^0-9])"

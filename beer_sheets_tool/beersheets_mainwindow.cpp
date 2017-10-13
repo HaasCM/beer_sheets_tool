@@ -1,6 +1,6 @@
 /*!
   \file beersheets_mainwindow.cpp
-  \brief file to declare the beersheets main window
+  \brief file to implement the BeerSheetsMainWindow
 */
 
 #include "beersheets_mainwindow.h"
