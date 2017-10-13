@@ -93,7 +93,6 @@ namespace Common {
     FreeAgent,
   };
 
-
   /*!
     \enum Position
     \brief Enum to depict NFL Position
@@ -240,5 +239,7 @@ namespace Common {
 };
 
 }
+Q_DECLARE_METATYPE(Common::NFLTeam);
+Q_DECLARE_METATYPE(Common::Position);
 
 #endif // COMMON_H

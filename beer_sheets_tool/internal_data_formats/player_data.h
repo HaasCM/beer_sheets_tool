@@ -6,13 +6,37 @@
 #ifndef PLAYER_DATA_H
 #define PLAYER_DATA_H
 
+/*!
+  \brief macro for the timestamp key used in toQStringMap()
+*/
 #define TIME_STAMP_KEY    "TimeStamp"
+/*!
+  \brief macro for the Round key used in toQStringMap()
+*/
 #define ROUND_KEY         "Round"
+/*!
+  \brief macro for the Pick key used in toQStringMap()
+*/
 #define PICK_KEY          "Pick"
+/*!
+  \brief macro for the weeks worthy of a start key used in toQStringMap()
+*/
 #define WEEKS_ONE_KEY     "Weeks Worthy of First"
+/*!
+  \brief macro for the weeks worthy of a secondary key used in toQStringMap()
+*/
 #define WEEKS_TWO_KEY     "Weeks Worthy of Second"
+/*!
+  \brief macro for the total games played key used in toQStringMap()
+*/
 #define GAMES_PLAYED_KEY  "Games Played"
+/*!
+  \brief macro for the value key used in toQStringMap()
+*/
 #define VALUE_KEY         "Value"
+/*!
+  \brief macro for the Positional Scarcity key used in toQStringMap()
+*/
 #define PS_KEY            "Positional Scarcity"
 
 #include <QDate>

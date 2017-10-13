@@ -4,7 +4,7 @@
 # Setting project paths
 BEERSHEETS_ROOT = $${PWD}
 BEERSHEETS_TOOL = $${BEERSHEETS_ROOT}/beer_sheets_tool
-SOURCE_DIR = $${BEERSHEETS_TOOL}/src
+SOURCE_DIR = $${BEERSHEETS_TOOL}
 COMMON_DIR = $${SOURCE_DIR}/common
 
 FILE_INFO_WIDGET = $${SOURCE_DIR}/file_info_widget

@@ -6,7 +6,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "common/common.h"
+#include "common.h"
 #include "player_data.h"
 
 /*!

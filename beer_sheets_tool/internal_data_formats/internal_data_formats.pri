@@ -1,4 +1,8 @@
-INCLUDEPATH += ../common/
+BEERSHEETS_ROOT = ../../..
+
+include{BEERSHEETS_ROOT/beer_sheets_tool.pri}
+
+INCLUDEPATH += $${COMMON_DIR}
 
 HEADERS += $${PWD}/beersheet.h \
            $${PWD}/player.h \
